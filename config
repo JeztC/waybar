@@ -8,7 +8,7 @@
     "modules-left": ["hyprland/workspaces", "hyprland/mode", "hyprland/scratchpad", "custom/media"],
     "modules-center": ["hyprland/window"],
     //"modules-right": ["mpd", "idle_inhibitor", "pulseaudio", "network", "cpu", "memory", "temperature", "backlight", "keyboard-state", "battery", "battery#bat2", "clock", "tray"],
-    "modules-right": ["mpd", "idle_inhibitor", "temperature", "cpu", "memory", "pulseaudio", "backlight", "keyboard-state", "battery", "battery#bat2", "tray", "clock"],
+    "modules-right": ["mpd", "idle_inhibitor", "custom/weather", "cpu", "memory", "pulseaudio", "backlight", "keyboard-state", "battery", "battery#bat2", "tray", "clock"],
     // Modules configuration
     "hyprland/workspaces": {
         "disable-scroll": true,
@@ -159,6 +159,18 @@
         "format-linked": " {ifname} (No IP)",
         "format-disconnected": "Disconnected ⚠ {ifname}",
         "format-alt": " {ifname}: {ipaddr}/{cidr}"
+    },
+    "custom/weather": {
+        "format": "{}",
+        //"format-alt": "{alt}: {}",
+        //"format-alt-click": "click-left",
+        "interval": 300,
+        "return-type": "json",
+        //"exec": "curl -s 'https://wttr.in/Kokkola?format=1' |jq --unbuffered --compact-output -M -R '{text:.}'",
+	"exec": "curl -s 'https://wttr.in/Kokkola?format=1' | awk '{$1=$1}1' | jq --unbuffered --compact-output -M -R '{text:.}'",
+        "exec-if": "ping wttr.in -c1",
+        "on-click-right": "kitty --start-as fullscreen bash -ci ~/bin/wttr"
+        // "on-click-right": "alacritty -e bash -ci ~/bin/wttr"
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
