@@ -47,6 +47,9 @@
             "19": "<b>9</b>",
         }
     },
+    "hyprland/window": {
+     "separate-outputs": true,
+    },
     "keyboard-state": {
         "numlock": true,
         "capslock": true,
