@@ -1,32 +1,23 @@
 {
-    "layer": "top", // Waybar at top layer
-    "position": "top", // Waybar position (top|bottom|left|right)
-    "height": 24, // Waybar height (to be removed for auto height)
-    // "width": t1280, // Waybar width
-    //"spacing": 4, // Gaps between modules (4px)
+    "layer": "top",
+    "position": "top",
+    "height": 30,
+    "spacing": 4,
+    "margin-top": 0,
+    "margin-bottom": 0,
+
     // Choose the order of the modules
-    "modules-left": ["hyprland/workspaces", "hyprland/mode", "hyprland/scratchpad", "custom/media"],
+    "modules-left": ["custom/launcher", "hyprland/workspaces"],
     "modules-center": ["hyprland/window"],
-    //"modules-right": ["mpd", "idle_inhibitor", "pulseaudio", "network", "cpu", "memory", "temperature", "backlight", "keyboard-state", "battery", "battery#bat2", "clock", "tray"],
-    "modules-right": ["mpd", "idle_inhibitor", "custom/weather", "cpu", "memory", "pulseaudio", "backlight", "keyboard-state", "battery", "battery#bat2", "tray", "clock"],
+    "modules-right": ["custom/media", "custom/weather", "custom/updater", "pulseaudio", "network", "cpu", "memory", "temperature", "backlight", "keyboard-state", "hyprland/language", "battery", "battery#bat2",  "tray", "clock", "custom/power"],
+
     // Modules configuration
     "hyprland/workspaces": {
         "disable-scroll": true,
         "all-outputs": false,
-	"warp-on-scroll": false,
+        "warp-on-scroll": false,
         "format": "{icon}",
-"persistent_workspaces": {
-    "1": ["11"],
-    "2": [],
-    "3": [],
-    "4": [],
-    "5": [],
-    "6": [],
-    "7": [],
-    "8": [],
-    "9": [],
-},
-	 "format-icons": {          
+         "format-icons": {
             "1": "<b>I</b>",
             "2": "<b>II</b>",
             "3": "<b>III</b>",
@@ -36,7 +27,7 @@
             "7": "<b>VII</b>",
             "8": "<b>VIII</b>",
             "9": "<b>IX</b>",
-	    "11": "<b>I</b>",
+            "11": "<b>I</b>",
             "12": "<b>II</b>",
             "13": "<b>III</b>",
             "14": "<b>IV</b>",
@@ -47,59 +38,23 @@
             "19": "<b>IX</b>",
         }
     },
-    "hyprland/window": {
-     "separate-outputs": true,
+    "hyprland/language": {
+      "format": "{icon}"
     },
     "keyboard-state": {
         "numlock": true,
         "capslock": true,
-        "format": "{name} {icon}",
+        "format": " {name} {icon}",
         "format-icons": {
             "locked": "",
             "unlocked": ""
         }
     },
+    "hyprland/window": {
+     "separate-outputs": true,
+    },
     "hyprland/mode": {
         "format": "<span style=\"italic\">{}</span>"
-    },
-    "hyprland/scratchpad": {
-        "format": "{icon} {count}",
-        "show-empty": false,
-        "format-icons": ["", ""],
-        "tooltip": true,
-        "tooltip-format": "{app}: {title}"
-    },
-    "mpd": {
-//        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
-        "format": "  {title} - {artist} {stateIcon} [{elapsedTime:%M:%S}/{totalTime:%M:%S}] {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}[{songPosition}/{queueLength}] [{volume}%]",
-        "format-disconnected": " Disconnected",
-        "format-stopped": " {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped",
-        "unknown-tag": "N/A",
-        "interval": 2,
-        "consume-icons": {
-            "on": " "
-        },
-        "random-icons": {
-//            "off": "<span color=\"#f53c3c\"></span> ",
-            "on": " "
-        },
-        "repeat-icons": {
-            "on": " "
-        },
-        "single-icons": {
-            "on": "1 "
-        },
-        "state-icons": {
-            "paused": "",
-            "playing": ""
-        },
-        "tooltip-format": "MPD (connected)",
-        "tooltip-format-disconnected": "MPD (disconnected)",
-        "on-click": "mpc toggle",
-//        "on-click-right": "foot ncmpcpp",
-        "on-scroll-up": "mpc volume +2",
-        "on-scroll-down": "mpc volume -2"
-
     },
     "idle_inhibitor": {
         "format": "{icon}",
@@ -109,33 +64,41 @@
         }
     },
     "tray": {
-        // "icon-size": 21,
+        "icon-size": 20,
         "spacing": 10
     },
     "clock": {
         // "timezone": "America/New_York",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%d.%m.%Y}"
+        "format-alt": "{:%Y-%m-%d}"
     },
     "cpu": {
-        "format": " {usage}%",
-//        "tooltip": false
+        "format": "{usage}% ",
+        "tooltip": false
     },
     "memory": {
-        "format": "💻 {}%"
+        "format": "{}% 💻"
+    },
+    "custom/weather": {
+        "format": "{}",
+        "interval": 300,
+        "return-type": "json",
+        "exec": "curl -s 'https://wttr.in/Kokkola?format=1' | awk '{$1=$1}1' | jq --unbuffered --compact-output -M -R '{text:.}'",
+        "exec-if": "ping wttr.in -c1",
+        "on-click-right": "kitty --start-as fullscreen bash -ci ~/bin/wttr"
     },
     "temperature": {
-        "thermal-zone": 2,
-        "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
+        // "thermal-zone": 2,
+        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
         "critical-threshold": 80,
-        "format-critical": "{icon} {temperatureC}°C",
-        "format": "{icon} {temperatureC}°C",
+        // "format-critical": "{temperatureC}°C {icon}",
+        "format": "{temperatureC}°C {icon}",
         "format-icons": ["", "", ""]
     },
     "backlight": {
         // "device": "acpi_video1",
-        "format": "{icon} {percent}%",
-        "format-icons": ["", "", "", "", "", "", "", "", ""]
+        "format": "{percent}% {icon}",
+        "format-icons": ["", ""]
     },
     "battery": {
         "states": {
@@ -143,10 +106,10 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "{icon} {capacity}%",
-        "format-charging": " {capacity}%",
-        "format-plugged": " {capacity}%",
-        "format-alt": "{icon} {time}",
+        "format": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon}",
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
         "format-icons": ["", "", "", "", ""]
@@ -157,54 +120,59 @@
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
         "format-wifi": "{essid} ({signalStrength}%) ",
-        "format-ethernet": " {ifname}",
-        "tooltip-format": " {ifname} via {gwaddr}",
-        "format-linked": " {ifname} (No IP)",
-        "format-disconnected": "Disconnected ⚠ {ifname}",
-        "format-alt": " {ifname}: {ipaddr}/{cidr}"
-    },
-    "custom/weather": {
-        "format": "{}",
-        //"format-alt": "{alt}: {}",
-        //"format-alt-click": "click-left",
-        "interval": 300,
-        "return-type": "json",
-        //"exec": "curl -s 'https://wttr.in/Kokkola?format=1' |jq --unbuffered --compact-output -M -R '{text:.}'",
-	"exec": "curl -s 'https://wttr.in/Kokkola?format=1' | awk '{$1=$1}1' | jq --unbuffered --compact-output -M -R '{text:.}'",
-        "exec-if": "ping wttr.in -c1",
-        "on-click-right": "kitty --start-as fullscreen bash -ci ~/bin/wttr"
-        // "on-click-right": "alacritty -e bash -ci ~/bin/wttr"
+        "format-ethernet": "Connected  ",
+        "tooltip-format": "{ifname} via {gwaddr} ",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "Disconnected ⚠",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}",
+        "on-click-right": "bash ~/.config/rofi/wifi_menu/rofi_wifi_menu"
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
-        "format": "🔈 {volume}% ",
-        "format-bluetooth": " {icon} {volume}% {format_source}",
-        "format-bluetooth-muted": "  {icon} {format_source}",
-        "format-muted": "  {format_source}",
-        "format-source": " {volume}%",
+        "format": "{volume}% {icon}",
+        "format-bluetooth": "{volume}% {icon}",
+        "format-bluetooth-muted": "{icon} {format_source}",
+        "format-muted": "{format_source}",
+        "format-source": "🔈",
         "format-source-muted": "",
         "format-icons": {
-//            "headphone": "🔈",
-//            "hands-free": "",
-//            "headset": "",
-//            "phone": "",
-//            "portable": "",
-//            "car": "",
-		"default": "",
-            "//efault": ["", "", ""]
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["🔈", "🔈", "🔈"]
         },
         "on-click": "pavucontrol"
     },
     "custom/media": {
         "format": "{icon} {}",
         "return-type": "json",
-        "max-length": 40,
+        "max-length": 25,
         "format-icons": {
-            "spotify": "",
-            "default": "🎜"
+            "spotify": " ",
+            "default": " "
         },
         "escape": true,
-        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
-        // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
+        "exec": "$HOME/.config/system_scripts/mediaplayer.py 2> /dev/null",
+        "on-click": "playerctl play-pause"
+    },
+    "custom/launcher":{
+        "format": "󰣇",
+        "on-click": "rofi -show drun -theme ~/.config/rofi/sway/sway_config.rasi",
+        "on-click-right": "killall rofi"
+    },
+    "custom/power":{
+        "format": "⏻",
+        "on-click": "bash ~/.config/rofi/leave/powermenu.sh",
+        "on-click-right": "killall rofi"
+    },
+    "custom/updater":{
+        "format": "  {} Updates",
+        "exec": "yay -Qu | wc -l",
+        "exec-if": "[[ $(yay -Qu | wc -l) != 0 ]]",
+        "interval": 15,
+        "on-click": "alacritty -e yay -Syu"
     }
 }
