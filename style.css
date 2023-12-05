@@ -3,12 +3,13 @@
     border-radius: 0px;
     font-family: JetBrains Mono;
     font-size: 13px;
+    font-weight: bold;
     min-height: 0;
 }
 
 window#waybar {
     background-color: transparent;
-    color: #ffffff;
+    color: #BD93f9;
     transition-property: background-color;
     transition-duration: .5s;
 }
@@ -35,20 +36,22 @@ window#waybar.hidden {
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 #workspaces button:hover {
-    background: lightblue;
+    background: #BD93f9;
     color: black;
-    border-bottom: 3px solid #ffffff;
+    border-bottom: 1px solid #9775c7;
 
 }
 
-#workspaces button.focused {
-    background: #1f1f1f;
+#workspaces button.visible {
+    background: #BD93f9;
+    color: black;
+    border-bottom: 1px solid #9775c7;
 }
 
-#workspaces button.focused:hover {
-    background: lightblue;
+#workspaces button.active {
+    background: #BD93f9;
     color: black;
-    border-bottom: 3px solid #ffffff;
+    border-bottom: 1px solid #9775c7;
 
 }
 
@@ -71,7 +74,6 @@ window#waybar.hidden {
 #network,
 #pulseaudio,
 #custom-media,
-#custom-launcher,
 #custom-power,
 #tray,
 #mode,
@@ -79,7 +81,17 @@ window#waybar.hidden {
 #custom-weather,
 #mpd {
     padding: 0 10px;
-    color: black;
+    color: #BD93f9;
+}
+
+#custom-launcher {
+    font-size: 24px;
+    padding-left: 8px;
+    padding-right: 8px;
+    color: #7ebae4;
+    background-color: rgba(0, 0, 0, 0.5);
+    margin-left: 5px;
+    margin-top: 2px;
 }
 
 #window,
@@ -98,9 +110,7 @@ window#waybar.hidden {
 }
 
 #clock {
-    background-color: #FA8BFF;
-    background-image: linear-gradient(-45deg, #FA8BFF 0%, #2BD2FF 52%, #2BD2FF 90%);
-    color: black;
+    background-color: rgba(0,0,0,0.1);
     border-radius: 0px 20px 20px 0px;
     margin-right: 4px;
 }
@@ -137,57 +147,48 @@ label:focus {
 }
 
 #cpu {
-    background-color: #FA8BFF;
-    background-image: linear-gradient(45deg, #2BD2FF 0%, #2BD2FF 52%, #2BD2FF 90%);
-    color: black;
+    background-color: rgba(0,0,0,0.2);
 }
 
 #memory {
-    background-color: #FA8BFF;
-    background-image: linear-gradient(45deg, #2BD2FF 0%, #2BD2FF 52%, #2BD2FF 90%);
-    color: black;
+    background-color: rgba(0,0,0,0.2);
 }
 
 #disk {
-    background-color: #FA8BFF;
-    background-image: linear-gradient(45deg, #2BD2FF 0%, #2BD2FF 52%, #2BD2FF 90%);
-    color: black;
+    background-color: #6272A4;
+    background-image: linear-gradient(45deg, #6272A4 0%, #6272A4 52%, #6272A4 90%);
+    color: #BD93f9;
 }
 
 #backlight {
-    background-color: #FA8BFF;
-    background-image: linear-gradient(45deg, #2BD2FF 0%, #2BD2FF 52%, #2BD2FF 90%);
+    background-color: #6272A4;
+    background-image: linear-gradient(45deg, #6272A4 0%, #6272A4 52%, #6272A4 90%);
 
 }
 
 #network {
-    background-color: #FA8BFF;
-    background-image: linear-gradient(45deg, #2BD2FF 0%, #2BD2FF 52%, #2BD2FF 90%);
-    color: black;
+    background-color: rgba(0,0,0,0.2);
 }
 
 #network.disconnected {
-    background-color: #FA8BFF;
-    background-image: linear-gradient(45deg, #2BD2FF 0%, #2BD2FF 52%, #2BD2FF 90%);
+    background-color: #6272A4;
+    background-image: linear-gradient(45deg, #6272A4 0%, #6272A4 52%, #6272A4 90%);
     color: red;
 }
 
 #pulseaudio {
-    background-color: #FA8BFF;
-    background-image: linear-gradient(45deg, #2BD2FF 0%, #2BD2FF 52%, #2BD2FF 90%);
-    color: black;
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 0px 0px 0px 0px;
 }
 
 #pulseaudio.muted {
-    background-color: #FA8BFF;
-    background-image: linear-gradient(45deg, #2BD2FF 0%, #2BD2FF 52%, #2BD2FF 90%);
+    background-color: #6272A4;
+    background-image: linear-gradient(45deg, #6272A4 0%, #6272A4 52%, #6272A4 90%);
     color: red;
 }
 
 #custom-media {
-    background-color: #8EC5FC;
-    background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
-    color: black;
+    background-color: rgba(0,0,0,0.2);
     border-radius: 20px;
     margin-right: 5px;
 }
@@ -195,7 +196,7 @@ label:focus {
 #custom-media.custom-spotify {
     background-color: #8EC5FC;
     background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
-    color: black;
+    color: #BD93f9;
     border-radius: 20px;
     margin-right: 5px;
 
@@ -204,42 +205,33 @@ label:focus {
 #custom-media.custom-vlc {
     background-color: #8EC5FC;
     background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
-    color: black;
+    color: #BD93f9;
     border-radius: 20px;
     margin-right: 5px;
 }
 
 #custom-power{
-    background-color: #FA8BFF;
-    background-image: linear-gradient(45deg, #FA8BFF 0%, #2BD2FF 52%, #2BD2FF 90%);
+    background-color: rgba(0,0,0,0.1);
     font-size: 16px;
     border-radius: 19px;
 
 }
-#custom-launcher{
-    background-color: #FA8BFF;
-    background-image: linear-gradient(-45deg, #FA8BFF 0%, #2BD2FF 52%, #2BD2FF 90%);
-    font-size: 18px;
-    border-radius: 20px;
-
-}
 
 #custom-updater {
-    background-color: #FA8BFF;
-    background-image: linear-gradient(45deg, #2BD2FF 0%, #2BD2FF 52%, #2BD2FF 90%);
-    color: black;
+    background-color: #6272A4;
+    background-image: linear-gradient(45deg, #6272A4 0%, #6272A4 52%, #6272A4 90%);
+    color: #BD93f9;
 }
 
 #custom-weather {
-    background-color: #FA8BFF;
-    background-image: linear-gradient(45deg, #FA8BFF 0%, #2BD2FF 52%, #2BD2FF 90%);
+    background-color: rgba(0,0,0,0.2);
     border-radius: 20px 0px 0px 20px;
 }
 
 #temperature {
-    background-color: #FA8BFF;
-    background-image: linear-gradient(45deg, #2BD2FF 0%, #2BD2FF 52%, #2BD2FF 90%);
-    color: black;
+    background-color: #6272A4;
+    background-image: linear-gradient(45deg, #6272A4 0%, #6272A4 52%, #6272A4 90%);
+    color: #BD93f9;
 }
 
 #temperature.critical {
@@ -247,44 +239,42 @@ label:focus {
 }
 
 #tray {
-    background-color: #FA8BFF;
-    background-image: linear-gradient(-45deg, #2BD2FF 0%, #2BD2FF 52%, #2BD2FF 90%);
-    color: black;
+    background-color: rgba(0,0,0,0.2);
 }
 
 #tray > .passive {
     -gtk-icon-effect: dim;
     background-color: #FA8BFF;
-    background-image: linear-gradient(-45deg, #FA8BFF 0%, #2BD2FF 52%, #2BD2FF 90%);
-    color: black;
+    background-image: linear-gradient(-45deg, #6272A4 52%, #6272A4 90%);
+    color: #BD93f9;
 }
 
 #tray > .needs-attention {
     -gtk-icon-effect: highlight;
     background-color: #FA8BFF;
-    background-image: linear-gradient(-45deg, #FA8BFF 0%, #2BD2FF 52%, #2BD2FF 90%);
-    color: black;
+    background-image: linear-gradient(-45deg, #6272A4 52%, #6272A4 90%);
+    color: #BD93f9;
 }
 
 #idle_inhibitor {
-    background-color: #FA8BFF;
-    background-image: linear-gradient(45deg, #FA8BFF 0%, #2BD2FF 52%, #2BD2FF 90%);
+    background-color: #6272A4;
+    background-image: linear-gradient(45deg, #6272A4 52%, #6272A4 90%);
     border-radius: 20px 0px 0px 20px;
 
 }
 
 #idle_inhibitor.activated {
-    background-color: #FA8BFF;
-    background-image: linear-gradient(45deg, #FA8BFF 0%, #2BD2FF 52%, #2BD2FF 90%);
-    color: black;
+    background-color: #6272A4;
+    background-image: linear-gradient(45deg, #6272A4 52%, #6272A4 90%);
+    color: white;
     border-radius: 20px 0px 0px 20px;
 
 }
 
 #language {
-    background-color: #FA8BFF;
-    background-image: linear-gradient(45deg, #2BD2FF 0%, #2BD2FF 52%, #2BD2FF 90%);
-    color: black;
+    background-color: #6272A4;
+    background-image: linear-gradient(45deg, #6272A4 0%, #6272A4 52%, #6272A4 90%);
+    color: white;
     min-width: 16px;
 }
 

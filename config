@@ -70,14 +70,14 @@
     "clock": {
         "timezone": "Europe/Vilnius",
         "tooltip-format": "<big>{:%A, %d %B %Y}</big>\n<tt><small>{calendar}</small></tt>",
-        "format": "{:%a, %d %b %Y %H:%M}"
+        "format": "  {:%a, %d %b %Y %H:%M}"
     },
     "cpu": {
-        "format": "{usage}% ",
+        "format": "  {usage}%",
         "tooltip": false
     },
     "memory": {
-        "format": "{}% 💻"
+        "format": "💻 {}%"
     },
     "custom/weather": {
         "format": "{}",
@@ -120,7 +120,7 @@
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
         "format-wifi": "{essid} ({signalStrength}%) ",
-        "format-ethernet": "Connected  ",
+        "format-ethernet": "  Connected",
         "tooltip-format": "{ifname} via {gwaddr} ",
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ⚠",
@@ -129,11 +129,11 @@
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
-        "format": "{volume}% {icon}",
+        "format": "{icon} {volume}%",
         "format-bluetooth": "{volume}% {icon}",
         "format-bluetooth-muted": "{icon} {format_source}",
         "format-muted": "{format_source}",
-        "format-source": "🔈",
+        "format-source": "",
         "format-source-muted": "",
         "format-icons": {
             "headphone": "",
@@ -142,7 +142,7 @@
             "phone": "",
             "portable": "",
             "car": "",
-            "default": ["🔈", "🔈", "🔈"]
+            "default": ["", "", ""]
         },
         "on-click": "pavucontrol"
     },
@@ -159,9 +159,9 @@
         "on-click": "playerctl play-pause"
     },
     "custom/launcher":{
-        "format": "󰣇",
-        "on-click": "rofi -show drun -theme ~/.config/rofi/sway/sway_config.rasi",
-        "on-click-right": "killall rofi"
+        "format": " ",
+        "font-size": 20,
+        "height": 30
     },
     "custom/power":{
         "format": "⏻",
